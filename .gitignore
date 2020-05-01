@@ -41,6 +41,7 @@
 *.su
 *.idb
 *.pdb
+finite-state-machines
 
 # Kernel Module Compile Results
 *.mod*
