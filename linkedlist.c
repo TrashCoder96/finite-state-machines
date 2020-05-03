@@ -2,30 +2,30 @@
 #include <stdlib.h>
 
 struct LinkedListNode {
-    void* value;
-    struct LinkedListNode* next;
+    void *value;
+    struct LinkedListNode *next;
 };
 
 struct LinkedList {
-    struct LinkedListNode* head;    
+    struct LinkedListNode *head;    
 };
 
-void pushItem(struct LinkedList* list, void* value) {
-    struct LinkedListNode* newItem = (struct LinkedListNode*)malloc(sizeof(struct LinkedListNode));
+void pushItem(struct LinkedList *list, int *value) {
+    struct LinkedListNode *newItem = (struct LinkedListNode*)malloc(sizeof(struct LinkedListNode));
     newItem->value = value;
     newItem->next = list->head;
     list->head = newItem;
 }
 
-void removeItem(struct LinkedList* list, void* value) {
-    if (list->head != NULL) {
-        struct LinkedListNode* beforeItem = NULL;
-        struct LinkedListNode* item = list->head;
-        while (item->value != value || item != NULL) {
+void removeItem(struct LinkedList *list, int *value) {
+    if (!list->head) {
+        struct LinkedListNode *beforeItem = NULL;
+        struct LinkedListNode *item = list->head;
+        while (item->value != value || !item) {
             beforeItem = item;
             item = item->next;
         }
-        if (item != NULL) {
+        if (!item) {
             if (list->head == item) {
                 list->head = item->next;
             } else {

@@ -3,7 +3,7 @@
 #include "linkedlist.c"
 
 int main() {
-  struct LinkedList* list = (struct LinkedList*)malloc(sizeof(struct LinkedList*));
+  struct LinkedList *list = (struct LinkedList*)malloc(sizeof(struct LinkedList));
   list->head = NULL;
   int i1 = 1;
   int i2 = 2;
