@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct LinkedList {
-    struct LinkedListNode* head;    
-};
-
 struct LinkedListNode {
     void* value;
     struct LinkedListNode* next;
 };
 
+struct LinkedList {
+    struct LinkedListNode* head;    
+};
+
 void pushItem(struct LinkedList* list, void* value) {
-    struct LinkedListNode* newItem = malloc(sizeof(struct LinkedListNode));
+    struct LinkedListNode* newItem = (struct LinkedListNode*)malloc(sizeof(struct LinkedListNode));
     newItem->value = value;
     newItem->next = list->head;
     list->head = newItem;
