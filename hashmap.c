@@ -21,6 +21,9 @@ struct HashMap *newMap() {
 };
 
 void freeMap(struct HashMap *map) {
+    for (int i = 0; i < INITIAL_CAPACITY; i++) {
+        free(map->buckets[i]);
+    }
     free(map->buckets);
     free(map);
 }
