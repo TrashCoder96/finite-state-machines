@@ -1,16 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedlist.c"
+#include "hashmap.c"
 
 int main() {
-  struct LinkedList *list = (struct LinkedList*)malloc(sizeof(struct LinkedList));
-  list->head = NULL;
-  int i1 = 1;
-  int i2 = 2;
-  pushItem(list, &i1);
-  pushItem(list, &i2);
-  removeItem(list, &i2);
-  removeItem(list, &i1);
-  free(list);
+  struct HashMap *map = newMap();
+  //struct LinkedList *newList = (struct LinkedList*)malloc(sizeof(struct LinkedList));
+  //map->buckets[8] = newList;
+  freeMap(map);
   return 0;
 }

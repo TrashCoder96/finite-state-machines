@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 struct LinkedListNode {
-    void *value;
+    int *value;
     struct LinkedListNode *next;
 };
 
