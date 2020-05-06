@@ -18,8 +18,8 @@ struct HashMap *newMap() {
 };
 
 int hash(int key) {
-     return key % INITIAL_CAPACITY;
- }
+    return key % INITIAL_CAPACITY;
+}
 
 void freeMap(struct HashMap *map) {
     for (int i = 0; i < INITIAL_CAPACITY; i++) {
@@ -39,3 +39,7 @@ int *get(struct HashMap *map, int key) {
     return find(bucket, key);
 }
 
+void rem(struct HashMap *map, int key) {
+    struct LinkedList *bucket = map->buckets[hash(key)];
+    removeItem(bucket, key);
+}

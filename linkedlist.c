@@ -14,7 +14,7 @@ struct LinkedList {
 
 int *find(struct LinkedList *list, int key) {
     struct LinkedListNode *item = list->head;
-    while (item->key != key && item != NULL) {
+    while (item != NULL && item->key != key) {
         item = item->next;
     }
     if (item != NULL) {
@@ -33,10 +33,10 @@ void pushItem(struct LinkedList *list, int key, int *value) {
 }
 
 void removeItem(struct LinkedList *list, int key) {
-    if (!list->head) {
+    if (list->head != NULL) {
         struct LinkedListNode *beforeItem = NULL;
         struct LinkedListNode *item = list->head;
-        while (item->key != key && item != NULL) {
+        while (item != NULL && item->key != key) {
             beforeItem = item;
             item = item->next;
         }

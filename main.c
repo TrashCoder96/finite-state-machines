@@ -4,18 +4,18 @@
 
 int main() {
   struct HashMap *map = newMap();
-  int i1 = 1;
-  int i2 = 2;
-  int i3 = 3;
-  put(map, 1, &i1);
-  put(map, 2, &i2);
-  put(map, 3, &i3);
-  int *h1 = get(map, 1);
-  int *h2 = get(map, 2);
-  int *h3 = get(map, 3);
-  printf("%d", *h2);
-  printf("%d", *h1);
-  printf("%d", *h3);
+  for (int i = 10; i < 100; i++) {
+    int *num = (int*)malloc(sizeof(int));
+    *num = i;
+    put(map, i, num);
+  }
+  rem(map, 78);
+  for (int i = 10; i < 100; i++) {
+    int *h = get(map, i);
+    if (h != NULL) {
+      printf("%d\n", *h);
+    }
+  }
   freeMap(map);
   return 0;
 }
