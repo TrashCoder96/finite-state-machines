@@ -11,14 +11,15 @@ struct HashMap *newMap() {
     struct HashMap *map = (struct HashMap*)malloc(sizeof(struct HashMap));
     map->buckets = malloc(INITIAL_CAPACITY * sizeof(struct LinkedList*));
     for (int i = 0; i < INITIAL_CAPACITY; i++) {
-        int i0 = 1;
-        int i1 = 2;
         map->buckets[i] = (struct LinkedList*)malloc(sizeof(struct LinkedList));
-        pushItem(map->buckets[i], &i0);
-        pushItem(map->buckets[i], &i1);
+        map->buckets[i]->head = NULL;
     }
     return map;
 };
+
+int hash(int key) {
+     return key % INITIAL_CAPACITY;
+ }
 
 void freeMap(struct HashMap *map) {
     for (int i = 0; i < INITIAL_CAPACITY; i++) {
@@ -28,11 +29,13 @@ void freeMap(struct HashMap *map) {
     free(map);
 }
 
-void put(int key, int *value) {
-    
+void put(struct HashMap *map, int key, int *value) {
+    struct LinkedList *bucket = map->buckets[hash(key)];
+    pushItem(bucket, key, value);
 }
 
-int *get(int key) {
-    return NULL;
+int *get(struct HashMap *map, int key) {
+    struct LinkedList *bucket = map->buckets[hash(key)];
+    return find(bucket, key);
 }
 
