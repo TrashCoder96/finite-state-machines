@@ -3,8 +3,8 @@
 #include <stdbool.h>
 
 struct LinkedListNode {
-    int key;
-    int *value;
+    char key;
+    struct State *value;
     struct LinkedListNode *next;
 };
 
@@ -12,7 +12,7 @@ struct LinkedList {
     struct LinkedListNode *head;    
 };
 
-int *find(struct LinkedList *list, int key) {
+int *find(struct LinkedList *list, char key) {
     struct LinkedListNode *item = list->head;
     while (item != NULL && item->key != key) {
         item = item->next;
@@ -24,7 +24,7 @@ int *find(struct LinkedList *list, int key) {
     }
 }
 
-void pushItem(struct LinkedList *list, int key, int *value) {
+void pushItem(struct LinkedList *list, char key, struct State *value) {
     struct LinkedListNode *newItem = (struct LinkedListNode*)malloc(sizeof(struct LinkedListNode));
     newItem->key = key;
     newItem->value = value;
@@ -32,7 +32,7 @@ void pushItem(struct LinkedList *list, int key, int *value) {
     list->head = newItem;
 }
 
-void removeItem(struct LinkedList *list, int key) {
+void removeItem(struct LinkedList *list, char key) {
     if (list->head != NULL) {
         struct LinkedListNode *beforeItem = NULL;
         struct LinkedListNode *item = list->head;

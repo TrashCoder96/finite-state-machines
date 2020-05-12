@@ -1,21 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "hashmap.c"
+#include "finite_state_machine.c"
+#include <stdbool.h>
+#include <string.h>
 
 int main() {
-  struct HashMap *map = newMap();
-  for (int i = 10; i < 100; i++) {
-    int *num = (int*)malloc(sizeof(int));
-    *num = i;
-    put(map, i, num);
-  }
-  rem(map, 78);
-  for (int i = 10; i < 100; i++) {
-    int *h = get(map, i);
-    if (h != NULL) {
-      printf("%d\n", *h);
-    }
-  }
-  freeMap(map);
+  char *str1 = "abayuiop";
+  char *str2 = "yuiopret";
+  printf("%d", sigma(str1, 8, str2, 8));
   return 0;
 }

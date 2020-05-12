@@ -17,7 +17,7 @@ struct HashMap *newMap() {
     return map;
 };
 
-int hash(int key) {
+int hash(char key) {
     return key % INITIAL_CAPACITY;
 }
 
@@ -29,17 +29,17 @@ void freeMap(struct HashMap *map) {
     free(map);
 }
 
-void put(struct HashMap *map, int key, int *value) {
+void put(struct HashMap *map, char key, struct State *value) {
     struct LinkedList *bucket = map->buckets[hash(key)];
     pushItem(bucket, key, value);
 }
 
-int *get(struct HashMap *map, int key) {
+int *get(struct HashMap *map, char key) {
     struct LinkedList *bucket = map->buckets[hash(key)];
     return find(bucket, key);
 }
 
-void rem(struct HashMap *map, int key) {
+void rem(struct HashMap *map, char key) {
     struct LinkedList *bucket = map->buckets[hash(key)];
     removeItem(bucket, key);
 }
