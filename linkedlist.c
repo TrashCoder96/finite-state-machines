@@ -12,7 +12,7 @@ struct LinkedList {
     struct LinkedListNode *head;    
 };
 
-int *find(struct LinkedList *list, char key) {
+struct State *find(struct LinkedList *list, char key) {
     struct LinkedListNode *item = list->head;
     while (item != NULL && item->key != key) {
         item = item->next;

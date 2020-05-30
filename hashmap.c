@@ -34,7 +34,7 @@ void put(struct HashMap *map, char key, struct State *value) {
     pushItem(bucket, key, value);
 }
 
-int *get(struct HashMap *map, char key) {
+struct State *get(struct HashMap *map, char key) {
     struct LinkedList *bucket = map->buckets[hash(key)];
     return find(bucket, key);
 }
