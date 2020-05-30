@@ -5,8 +5,6 @@
 #include <string.h>
 
 int main() {
-  char *str1 = "abayuiop";
-  char *str2 = "yuiopret";
-  printf("%d", sigma(str1, 8, str2, 8));
+  printf("fref");
   return 0;
 }
