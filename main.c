@@ -5,6 +5,6 @@
 #include <string.h>
 
 int main() {
-  printf("fref");
+  struct FiniteStateMachine *m = compile_finite_state_machine("ababc", 5);
   return 0;
 }

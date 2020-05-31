@@ -35,7 +35,7 @@ int sigma(char *str, int str_size, char *pattern, int pattern_size) {
 }
 
 struct Alphabet *getAlphabet(char *pattern, int pattern_size) {
-    char *alphabetSeq = (char*)malloc(pattern_size * sizeof(char));
+    char *alphabetSeq = malloc(pattern_size * sizeof(char));
     char countOfAlphabetSymbols = 0;
     char symbol = pattern[0];
     alphabetSeq[0] = symbol;
@@ -50,7 +50,7 @@ struct Alphabet *getAlphabet(char *pattern, int pattern_size) {
             aphabetSize++;
         }
         if (!found) {
-            alphabetSeq[aphabetSize - 1] = pattern[i];
+            alphabetSeq[aphabetSize] = pattern[i];
             countOfAlphabetSymbols++;
         }
     }
@@ -62,7 +62,7 @@ struct Alphabet *getAlphabet(char *pattern, int pattern_size) {
 
 struct FiniteStateMachine *compile_finite_state_machine(char *pattern, int pattern_size) {
     struct Alphabet *alphabet = getAlphabet(pattern, pattern_size);
-    struct FiniteStateMachine *machine = (struct FiniteStateMachine*)malloc(sizeof(struct FiniteStateMachine));
+    struct FiniteStateMachine *machine = malloc(sizeof(struct FiniteStateMachine));
     
     //allocates states array
     struct State states[pattern_size + 1];
