@@ -4,6 +4,7 @@
 
 struct FiniteStateMachine {
     struct State *currentState;
+    struct State *startState;
 };
 
 struct State {
@@ -60,6 +61,19 @@ struct Alphabet *getAlphabet(char *pattern, int pattern_size) {
     return alphabet;
 }
 
+int run(struct FiniteStateMachine *m, char c, int pattern_size) {
+    struct State *state = get(m->currentState->nextStates, c);
+    if (state == NULL) {
+        state = m->startState;
+    }
+    m->currentState = state;
+    if (m->currentState->number == pattern_size) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 struct FiniteStateMachine *compile_finite_state_machine(char *pattern, int pattern_size) {
     struct Alphabet *alphabet = getAlphabet(pattern, pattern_size);
     struct FiniteStateMachine *machine = malloc(sizeof(struct FiniteStateMachine));
@@ -84,6 +98,9 @@ struct FiniteStateMachine *compile_finite_state_machine(char *pattern, int patte
             }
         }
     }
-    free(substr);
-    return NULL;
+    machine->currentState = &states[0];
+    machine->startState = &states[0];
+    free(alphabet->alphabetSeq);
+    free(alphabet);
+    return machine;
 }
