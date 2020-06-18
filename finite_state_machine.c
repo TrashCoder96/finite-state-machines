@@ -5,6 +5,8 @@
 struct FiniteStateMachine {
     struct State *currentState;
     struct State *startState;
+    char *pattern;
+    int pattern_size;
 };
 
 struct State {
@@ -92,7 +94,7 @@ struct FiniteStateMachine *compile_finite_state_machine(char *pattern, int patte
         //connect previous state and current new one
         put(states[i - 1].nextStates, pattern[i - 1], &states[i]);
         for (int j = 0; j < alphabet->size; j++) { //alphabet
-            if (pattern[i ] != alphabet->alphabetSeq[j]) {
+            if (pattern[i] != alphabet->alphabetSeq[j]) {
                 substr[i - 1] = alphabet->alphabetSeq[j];
                 put(states[i].nextStates, alphabet->alphabetSeq[j], &states[sigma(substr, i, pattern, pattern_size)]);
             }
@@ -102,5 +104,19 @@ struct FiniteStateMachine *compile_finite_state_machine(char *pattern, int patte
     machine->startState = &states[0];
     free(alphabet->alphabetSeq);
     free(alphabet);
+    machine->pattern = pattern;
+    machine->pattern_size = pattern_size;
     return machine;
+}
+
+void destroy_finite_state_machine(struct FiniteStateMachine *machine) {
+    struct State *currentState = machine->startState;
+    int i = 0;
+    while (currentState->number != machine->pattern_size) {
+        struct State *previousState = currentState;
+        currentState = get(currentState->nextStates, machine->pattern[i]);
+        //free(previousState->nextStates);
+        freeMap(previousState->nextStates);
+        i++;
+    }
 }

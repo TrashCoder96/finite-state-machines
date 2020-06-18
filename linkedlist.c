@@ -12,6 +12,17 @@ struct LinkedList {
     struct LinkedListNode *head;    
 };
 
+void freeLinkedList(struct LinkedList *list) {
+    struct LinkedListNode *next = list->head;
+    struct LinkedListNode *previous = NULL;
+    while (next != NULL) {
+        previous = next;
+        next = next->next;
+        free(previous);
+    }
+    //free(list);
+}
+
 struct State *find(struct LinkedList *list, char key) {
     struct LinkedListNode *item = list->head;
     while (item != NULL && item->key != key) {

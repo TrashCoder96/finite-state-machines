@@ -21,7 +21,7 @@ int hash(char key) {
 }
 
 void freeMap(struct HashMap *map) {
-    free(map->buckets);
+    freeLinkedList(map->buckets);
     free(map);
 }
 
